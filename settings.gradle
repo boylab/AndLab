@@ -1,0 +1,3 @@
+include ':andlab'
+include ':app'
+rootProject.name = "AndLab"
