@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -84,21 +83,18 @@ public class RecyclerUtil {
     }
 
     /**
-     * <>为什么是add？</>
-     * 注意：recyclerView.addItemDecoration(@NonNull ItemDecoration decor)
-     * 即：分开添加verticalDivider、horizontalDivider即可
+     * 注意：recyclerView 实现标准GridView
      */
-    public static void gridDivider(Context context, int color, int offset, boolean isDrawTop, boolean isDrawSide){
-        int dp2px = dp2px(context, offset);
-        new GridDecoration(color, dp2px, isDrawTop, isDrawSide);
+    public static RecyclerView.ItemDecoration gridDivider(int color, boolean isDrawTop, boolean isDrawSide){
+        return new GridDecoration(color, isDrawTop, isDrawSide);
     }
 
-    private static int dp2px(Context context, int dp){
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        float density = displayMetrics.density;
-        //float fontScale = displayMetrics.scaledDensity;
-        int px = (int) (dp * density + 0.5f);
-        return px;
+    /**
+     * 注意：recyclerView 粗略实现非标准GridView
+     * @param color
+     */
+    public static RecyclerView.ItemDecoration gridDivider(int color){
+        return new GridDecoration(color);
     }
 
     /**
@@ -107,21 +103,31 @@ public class RecyclerUtil {
      */
     public static class GridDecoration extends RecyclerView.ItemDecoration {
 
+        private boolean isStandard = true;
+
         private int color = Color.GRAY;
-        private int offset = 4;
-
-        private Paint mPaint;
-        private Rect mRect = new Rect();
-
         private boolean isDrawTop = false;
         private boolean isDrawSide = false; //左右两边
 
-        public GridDecoration(int color, int offset) {
-            this(color, offset, false, false);
+        private int offset = 2;
+        private Paint mPaint;
+        private Rect mRect = new Rect();
+
+        /**
+         * 粗略绘制实现右、下画线
+         * @param color
+         */
+        public GridDecoration(int color) {
+            this(color, 2, false, false);
+            this.isStandard = false;
         }
 
-        public GridDecoration(boolean isDrawTop, boolean isDrawSide) {
-            this(Color.GRAY, 4, isDrawTop, isDrawSide);
+        /**
+         * 下列方法实现标准列表
+         * @param color
+         */
+        public GridDecoration(int color, boolean isDrawTop, boolean isDrawSide) {
+            this(color, 2, isDrawTop, isDrawSide);
         }
 
         public GridDecoration(int color, int offset, boolean isDrawTop, boolean isDrawSide) {
@@ -130,19 +136,6 @@ public class RecyclerUtil {
             this.isDrawTop = isDrawTop;
             this.isDrawSide = isDrawSide;
             initPaint();
-        }
-
-        public GridDecoration setColor(int color, int offset) {
-            this.color = color;
-            this.offset = offset;
-            initPaint();
-            return this;
-        }
-
-        public GridDecoration setDrawSide(boolean isDrawTop, boolean isDrawSide) {
-            this.isDrawTop = isDrawTop;
-            this.isDrawSide = isDrawSide;
-            return this;
         }
 
         private void initPaint(){
@@ -165,6 +158,10 @@ public class RecyclerUtil {
 
         @Override
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            if (!isStandard){
+                outRect.set(0, 0, offset, offset);
+                return;
+            }
             GridLayoutManager manager = (GridLayoutManager) parent.getLayoutManager();
             int size = parent.getChildCount();
             int spanCount = manager.getSpanCount();
