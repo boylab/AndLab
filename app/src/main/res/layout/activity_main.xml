@@ -6,9 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.boylab.andlab.view.RefreshRecycler
-        android:id="@+id/refreshRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <Button
+        android:id="@+id/btn_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击1" />
+
+    <Button
+        android:id="@+id/btn_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_01"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击2" />
+
+    <Button
+        android:id="@+id/btn_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_02"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击3" />
+
+    <Button
+        android:id="@+id/btn_04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_03"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击4" />
+
+    <Button
+        android:id="@+id/btn_045"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_04"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击45" />
+
+    <Button
+        android:id="@+id/btn_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_045"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击5" />
+
+    <Button
+        android:id="@+id/btn_06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_05"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击6" />
+
+    <Button
+        android:id="@+id/btn_07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_06"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击7" />
+
+    <Button
+        android:id="@+id/btn_08"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_07"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:text="点击8" />
 
 </RelativeLayout>
